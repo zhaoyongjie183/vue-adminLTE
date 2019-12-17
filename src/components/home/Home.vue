@@ -15,6 +15,17 @@ import WebFooter from "../layout/Footer";
 import WebBody from "../layout/Body";
 
 export default {
+  inject:['reload'],
+  mounted(){
+    //this.$router.go(0);
+    //this.reload();
+  },
+  methods:{
+    reload(){
+      console.info("hahha");
+      this.reload();
+    }
+  },
   components: {
     WebHeader,
     WebMenu,

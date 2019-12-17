@@ -3,13 +3,34 @@
       <!-- <img src="./assets/logo.png"> -->
    <!-- 路由出口 -->
   <!-- 路由匹配到的组件将渲染在这里 -->
-  <router-view :key="$route.fullPath"></router-view>
+   <transition name="fade" mode="out-in">
+        <router-view v-if="isRouterAlive"></router-view>
+      </transition>
+  
   </div>
   
 </template>
 <script>
 export default {
-  name: 'app'
+  name: 'app',
+   provide(){
+    return{
+      reload:this.reload
+    }
+  },
+  data(){
+    return{
+      isRouterAlive:true
+    }
+  },
+  methods:{
+    reload(){
+      this.isRouterAlive = false;
+      this.$nextTick(function(){
+        this.isRouterAlive = true;
+      })
+    }
+  }
 }
 </script>
 
